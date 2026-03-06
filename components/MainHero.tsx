@@ -5,8 +5,6 @@ export const MobileHero = styled.div`
     background-color: #2B2B2B;
     padding-top:20px;
     padding-bottom:16px;
-    background-image:url(./bg-texture.png);
-    background-blend-mode:color-burn;
     display:grid;
     justify-content:center;
     
