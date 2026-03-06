@@ -1,0 +1,4 @@
+export const Device = {
+    mobile : `(max-width: 767px)`,
+    desktop : `(min-width:768px)`
+}
