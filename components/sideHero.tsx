@@ -16,6 +16,18 @@ export const SideHeroContainer = styled.div`
     }
 `
 
+export const SideHeroMobile = styled.div`
+    background-color:#2B2B2B;
+    padding: 33px 24px 18px 24px;
+    display:grid;
+    row-gap:26px;
+    border-bottom:1px dashed #3E3E3E;
+
+    @media ${Device.desktop}{
+        display:none
+    }
+`
+
 export const BrandsWrapper = styled.div`
     display:flex;
     align-items:center;

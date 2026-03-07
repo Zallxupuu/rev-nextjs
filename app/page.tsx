@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { Device } from "../utils/theme"
-import { SideHeroContainer, ProjectsHero, PricingHero, AboutHero } from "@/components/sideHero";
+import { SideHeroContainer, ProjectsHero, PricingHero, AboutHero, SideHeroMobile } from "@/components/sideHero";
 import { CTAButton, Avatar, Icon } from "@/components/CTAButton";
 import { TagsContainer, TagsTitle } from "@/components/Tags";
 import { MobileHero, Dot, DotContainer, ImageContainer, DesktopHero, DesktopContent } from "@/components/MainHero";
@@ -373,7 +373,7 @@ export default function Home() {
       </DesktopContent>
       </DesktopContainer>
 
-      <SideHeroContainer>
+      <SideHeroMobile>
         {isTab === 'Projects' && (<>
           <ProjectsHero>
             <div>
@@ -456,7 +456,7 @@ export default function Home() {
           <Dot />
         </DotContainer>
         </DesktopHero>
-      </SideHeroContainer>
+      </SideHeroMobile>
       
       <MobileHero>
         <p>Wall of love from people ❤️</p>
