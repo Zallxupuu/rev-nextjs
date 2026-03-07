@@ -3,11 +3,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import {Device} from "../utils/theme"
-import { SideHeroContainer,ProjectsHero,PricingHero,AboutHero,BrandsWrapper } from "@/components/sideHero";
-import { CTAButton,Avatar,Icon } from "@/components/CTAButton";
-import { TagsContainer,TagsTitle } from "@/components/Tags";
-import { MobileHero, Dot, DotContainer,ImageContainer } from "@/components/MainHero";
+import { Device } from "../utils/theme"
+import { SideHeroContainer, ProjectsHero, PricingHero, AboutHero } from "@/components/sideHero";
+import { CTAButton, Avatar, Icon } from "@/components/CTAButton";
+import { TagsContainer, TagsTitle } from "@/components/Tags";
+import { MobileHero, Dot, DotContainer, ImageContainer, DesktopHero, DesktopContent } from "@/components/MainHero";
 import { Card } from "@/components/testimonialCard";
 
 const NavbarContainer = styled.nav`
@@ -25,7 +25,15 @@ const NavbarContainer = styled.nav`
   background-blend-mode:color-burn;
 
   @media ${Device.desktop} {
-    display: static;
+    display: flex;
+    justify-content: start;
+    position:sticky;
+  }
+
+  .time{
+    @media ${Device.mobile}{
+      display:none;
+    }
   }
 `
 
@@ -34,20 +42,47 @@ const Logo = styled.div`
   text-align: center;
   font-family: 'Switzer-bold';
   
-
+  width:6.5rem;
   display:flex;
   align-items:center;
   justify-content:center;
-  width: 5rem;
   height: 100%;
 `
 
+const NavContainer = styled.div`
+  display:flex;
+  width:100vw;
+  padding:0 2rem;
+  justify-content:space-between;
+  align-items:center;
+
+  @media ${Device.mobile}{
+    display:none;
+  }
+
+.navlinks{
+  display:flex; 
+  gap:32px;
+}
+
+.navlinks p{
+  cursor: pointer;
+}
+
+.brands{
+  display:flex;
+  align-items:center;
+  gap: 13px;
+}
+`
+
 const PillContainer = styled.div`
-width: 60%;
 height: 100%;
+width:32%;
 display:flex;
 align-items:center;
-justify-content:center;
+gap:52px;
+padding:0 1rem;
 `
 const Pill = styled.div`
 font-size:12px;
@@ -150,6 +185,27 @@ const Gap = styled.div`
   
 `
 
+const Line = styled.div`
+  width:100%;
+  border:1.3px dashed #3E3E3E;
+ 
+ @media ${Device.mobile}{
+  display:none;
+ }
+`
+
+const DesktopContainer = styled.div`
+  display:flex;
+  overflow:hidden;
+  height:100vh;
+  @media ${Device.mobile}{
+    display:none;
+  }
+
+`
+
+
+
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [isTab, setIsTab] = useState('Projects');
@@ -158,139 +214,287 @@ export default function Home() {
     <>
       <NavbarContainer>
         <Logo>ARJ</Logo>
-        <Gap/>
+        <Gap />
         <PillContainer>
-          <Pill><Ball/>2 slolt left this month</Pill>
+          <Pill><Ball />2 slot left this month</Pill>
+          <div className="time">
+            <p>14.58 PM</p>
+          </div>
         </PillContainer>
-        <Gap/>
-        <Menu><Image src={isOpen ? '/images/x.svg' : '/images/hamburger.png'} width={24} height={24} alt="hamburgermenu" onClick={()=> setIsOpen(prev => !prev)}/></Menu>
-        </NavbarContainer>
-        { isOpen === true ? (<>
-          <LinkContainer>
-           <div className="LinkWrapper">
+        <Gap />
+        <Menu><Image src={isOpen ? '/images/x.svg' : '/images/hamburger.png'} width={24} height={24} alt="hamburgermenu" onClick={() => setIsOpen(prev => !prev)} /></Menu>
+
+        <NavContainer>
+          <div className="navlinks">
+            <p style={{ fontFamily: isTab === 'Projects' ? 'Switzer-bold' : 'Switzer-light' }} onClick={()=> setIsTab('Projects')}>Projects</p>
+            <p style={{ fontFamily: isTab === 'About' ? 'Switzer-bold' : 'Switzer-light' }} onClick={()=> setIsTab('About')}>About</p>
+            <p style={{ fontFamily: isTab === 'Pricing' ? 'Switzer-bold' : 'Switzer-light' }} onClick={()=> setIsTab('Pricing')}>Pricing</p>
+            <p>Templates</p>
+            <p>FAQ</p>
+          </div>
+          <div className="brands">
+            <Image src='/navBrands/brand4.png' width={25.45} height={25.45} alt="brands" />
+                  <Image src='/navBrands/brand5.png' width={28} height={28} alt="brands" />
+                  <Image src='/navBrands/brand3.png' width={28} height={28} alt="brands" />
+                  <Image src='/navBrands/brand2.png' width={22.75} height={22.75} alt="brands" />
+                  <Image src='/navBrands/brand1.png' width={31.5} height={19.82} alt="brands" />
+          </div>
+        </NavContainer>
+      </NavbarContainer>
+      {isOpen === true ? (<>
+        <LinkContainer>
+          <div className="LinkWrapper">
             <div className="Link">
               <div>
-                <p onClick={()=>setIsTab('Projects')}>Projects</p>
+                <p onClick={() => setIsTab('Projects')}>Projects</p>
               </div>
               <div>
-                <p onClick={()=>setIsTab('About')}>About</p>
+                <p onClick={() => setIsTab('About')}>About</p>
               </div>
               <div>
-                <p onClick={()=>setIsTab('Pricing')}>Pricing</p>
+                <p onClick={() => setIsTab('Pricing')}>Pricing</p>
               </div>
               <div>
                 <p>FAQ</p>
               </div>
               <div>
-               <span>
-               <Image src='/navBrands/brand4.png' width={25.45} height={25.45} alt="brands"/>
-               <Image src='/navBrands/brand5.png' width={28} height={28} alt="brands"/>
-               <Image src='/navBrands/brand3.png' width={28} height={28} alt="brands"/>
-               <Image src='/navBrands/brand2.png' width={22.75} height={22.75} alt="brands"/>
-               <Image src='/navBrands/brand1.png' width={31.5} height={19.82} alt="brands"/>
-               </span>
+                <span>
+                  <Image src='/navBrands/brand4.png' width={25.45} height={25.45} alt="brands" />
+                  <Image src='/navBrands/brand5.png' width={28} height={28} alt="brands" />
+                  <Image src='/navBrands/brand3.png' width={28} height={28} alt="brands" />
+                  <Image src='/navBrands/brand2.png' width={22.75} height={22.75} alt="brands" />
+                  <Image src='/navBrands/brand1.png' width={31.5} height={19.82} alt="brands" />
+                </span>
               </div>
             </div>
-           </div>
-          </LinkContainer>
-          </>):
-          (<></>) }
+          </div>
+        </LinkContainer>
+      </>) :
+        (<></>)}
+<DesktopContainer>
+<SideHeroContainer>
+        {isTab === 'Projects' && (<>
+          <ProjectsHero>
+            <div>
+              <p>Mobile + Website Designer for <span>AI, Stocks, Crypto and Web3 Products.</span></p>
+            </div>
+          </ProjectsHero>
+          <CTAButton>
+            <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
+            Start a Project
+            <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18} />
+          </CTAButton>
 
-          <SideHeroContainer>
-            {isTab === 'Projects' && (<>
-              <ProjectsHero>
-                <div>
-                  <p>Mobile + Website Designer for <span>AI, Stocks, Crypto and Web3 Products.</span></p>
-                </div>
-              </ProjectsHero>
-                  <CTAButton>
-                    <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
-                    Start a Project
-                    <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18}/>
-                  </CTAButton>
-                  
-                  <TagsContainer>
-                    <TagsTitle>Mobile App Design</TagsTitle>
-                    <TagsTitle>UI/UX Design</TagsTitle>
-                    <TagsTitle>Brand Identity</TagsTitle>
-                    <TagsTitle>Framer Development</TagsTitle>
-                    <TagsTitle>Icon Design</TagsTitle>
-                    <TagsTitle>Product Design</TagsTitle>
-                  </TagsContainer>
+          <TagsContainer>
+            <TagsTitle>Mobile App Design</TagsTitle>
+            <TagsTitle>UI/UX Design</TagsTitle>
+            <TagsTitle>Brand Identity</TagsTitle>
+            <TagsTitle>Framer Development</TagsTitle>
+            <TagsTitle>Icon Design</TagsTitle>
+            <TagsTitle>Product Design</TagsTitle>
+          </TagsContainer>
 
-                  <div>
-                    <Image src='/images/brand1.png' alt="avatar" width={342} height={32}/>
-                    <Image src='/images/brands2.png' alt="avatar" width={342} height={32}/>
-                  </div>
-            </>)}
-            {isTab === 'About' && (<>
-              <AboutHero>
-                <p>I began my design journey as a freelance graphic and icon designer in 2017, and now Sr. Product Designer at 🦄  Fintech Startup.</p>
-                <p>I work mostly in the finance, crypto, stocks, and web3 industries. For me, design isn’t just about looking good — it’s about creating meaningful impact for users.</p>
-                <CTAButton>
-                    <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
-                    Start a Project
-                    <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18}/>
-                  </CTAButton>
-              </AboutHero>
-            </>)}
-            {isTab === 'Pricing' && (<>
-              <PricingHero>
-                <p>Simple pricing for you.</p>
+          <div>
+            <Image src='/images/brand1.png' alt="avatar" width={342} height={32} />
+            <Image src='/images/brands2.png' alt="avatar" width={342} height={32} />
+          </div>
+          
+        </>)}
+        {isTab === 'About' && (<>
+          <AboutHero>
+            <p>I began my design journey as a freelance graphic and icon designer in 2017, and now Sr. Product Designer at 🦄  Fintech Startup.</p>
+            <p>I work mostly in the finance, crypto, stocks, and web3 industries. For me, design isn’t just about looking good — it’s about creating meaningful impact for users.</p>
+            <CTAButton>
+              <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
+              Start a Project
+              <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18} />
+            </CTAButton>
+          </AboutHero>
+        </>)}
+        {isTab === 'Pricing' && (<>
+          <PricingHero>
+            <p>Simple pricing for you.</p>
 
-                <ul>
-                  <li>$1.000 for landing page</li>
-                  <li>$2.000 for up to 7 page</li>
-                  <li>$Start $4.000 for end to end app design</li>
-                </ul>
+            <ul>
+              <li>$1.000 for landing page</li>
+              <li>$2.000 for up to 7 page</li>
+              <li>Start $4.000 for end to end app design</li>
+            </ul>
 
-                <CTAButton>
-                    <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
-                    Start a Project
-                    <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18}/>
-                  </CTAButton>
+            <CTAButton>
+              <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
+              Start a Project
+              <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18} />
+            </CTAButton>
 
-                  <p className="hi">or say hi to me</p>
-              </PricingHero>
-            </>)}
-          </SideHeroContainer>
-            <MobileHero>
-              <p>Wall of love from people ❤️</p>
-              <Card>
-                <p className="text">Aan has excellent taste in visual design, his works will please your eyes at first sight.</p>
+            <p className="hi">or say hi to me</p>
+          </PricingHero>
+        </>)}
 
-                <div className="profile">
-                  <Avatar src='/images/avatar1.png' alt="avatar" width={36} height={36}/>
-                  <div className="title">
-                    <p>Feri Ardi</p>
-                    <p>Head of Design Stockbit & Bibit</p>
-                  </div>
-                </div>
-              </Card>
+        <Line/>
 
-              <DotContainer>
-                <Dot/>
-                <Dot/>
-                <Dot/>
-                <Dot/>
-                <Dot/>
-                <Dot/>
-              </DotContainer>
-              <div className="line"/>
+        <DesktopHero>
+            <p>Wall of love from people ❤️</p>
+        <Card>
+          <p className="text">Aan has excellent taste in visual design, his works will please your eyes at first sight.</p>
 
-              <ImageContainer>
-                <Image src='/images/dummy1.png' alt="avatar" width={329.81} height={195.87}/>
-              </ImageContainer>
-              <ImageContainer>
-                <Image src='/images/dummy3.png' alt="avatar" width={312.8} height={222.12}/>
-              </ImageContainer>
-              <ImageContainer>
-                <Image src='/images/dummy2.png' alt="avatar" width={329.81} height={195.87}/>
-              </ImageContainer>
-              <ImageContainer>
-                <Image src='/images/dummy1.png' alt="avatar" width={329.81} height={195.87}/>
-              </ImageContainer>
-            </MobileHero>
+          <div className="profile">
+            <Avatar src='/images/avatar1.png' alt="avatar" width={36} height={36} />
+            <div className="title">
+              <p>Feri Ardi</p>
+              <p>Head of Design Stockbit & Bibit</p>
+            </div>
+          </div>
+        </Card>
+        <DotContainer>
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+        </DotContainer>
+        </DesktopHero>
+      </SideHeroContainer>
+
+      <DesktopContent>
+          <ImageContainer>
+          <Image src='/images/dummy1.png' alt="avatar" width={980} height={582} />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src='/images/dummy3.png' alt="avatar" width={980} height={582} />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src='/images/dummy2.png' alt="avatar" width={980} height={582} />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src='/images/dummy1.png' alt="avatar" width={980} height={582} />
+        </ImageContainer>
+      </DesktopContent>
+      </DesktopContainer>
+
+      <SideHeroContainer>
+        {isTab === 'Projects' && (<>
+          <ProjectsHero>
+            <div>
+              <p>Mobile + Website Designer for <span>AI, Stocks, Crypto and Web3 Products.</span></p>
+            </div>
+          </ProjectsHero>
+          <CTAButton>
+            <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
+            Start a Project
+            <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18} />
+          </CTAButton>
+
+          <TagsContainer>
+            <TagsTitle>Mobile App Design</TagsTitle>
+            <TagsTitle>UI/UX Design</TagsTitle>
+            <TagsTitle>Brand Identity</TagsTitle>
+            <TagsTitle>Framer Development</TagsTitle>
+            <TagsTitle>Icon Design</TagsTitle>
+            <TagsTitle>Product Design</TagsTitle>
+          </TagsContainer>
+
+          <div>
+            <Image src='/images/brand1.png' alt="avatar" width={342} height={32} />
+            <Image src='/images/brands2.png' alt="avatar" width={342} height={32} />
+          </div>
+          
+        </>)}
+        {isTab === 'About' && (<>
+          <AboutHero>
+            <p>I began my design journey as a freelance graphic and icon designer in 2017, and now Sr. Product Designer at 🦄  Fintech Startup.</p>
+            <p>I work mostly in the finance, crypto, stocks, and web3 industries. For me, design isn’t just about looking good — it’s about creating meaningful impact for users.</p>
+            <CTAButton>
+              <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
+              Start a Project
+              <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18} />
+            </CTAButton>
+          </AboutHero>
+        </>)}
+        {isTab === 'Pricing' && (<>
+          <PricingHero>
+            <p>Simple pricing for you.</p>
+
+            <ul>
+              <li>$1.000 for landing page</li>
+              <li>$2.000 for up to 7 page</li>
+              <li>Start $4.000 for end to end app design</li>
+            </ul>
+
+            <CTAButton>
+              <Avatar src='/images/avatar2.jpg' alt="avatar" width={28.88} height={28.88} />
+              Start a Project
+              <Icon src='/images/iconbtn.svg' alt="avatar" width={18} height={18} />
+            </CTAButton>
+
+            <p className="hi">or say hi to me</p>
+          </PricingHero>
+        </>)}
+
+        <Line/>
+
+        <DesktopHero>
+            <p>Wall of love from people ❤️</p>
+        <Card>
+          <p className="text">Aan has excellent taste in visual design, his works will please your eyes at first sight.</p>
+
+          <div className="profile">
+            <Avatar src='/images/avatar1.png' alt="avatar" width={36} height={36} />
+            <div className="title">
+              <p>Feri Ardi</p>
+              <p>Head of Design Stockbit & Bibit</p>
+            </div>
+          </div>
+        </Card>
+        <DotContainer>
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+        </DotContainer>
+        </DesktopHero>
+      </SideHeroContainer>
+      
+      <MobileHero>
+        <p>Wall of love from people ❤️</p>
+        <Card>
+          <p className="text">Aan has excellent taste in visual design, his works will please your eyes at first sight.</p>
+
+          <div className="profile">
+            <Avatar src='/images/avatar1.png' alt="avatar" width={36} height={36} />
+            <div className="title">
+              <p>Feri Ardi</p>
+              <p>Head of Design Stockbit & Bibit</p>
+            </div>
+          </div>
+        </Card>
+
+        <DotContainer>
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+          <Dot />
+        </DotContainer>
+        <div className="line" />
+
+        <ImageContainer>
+          <Image src='/images/dummy1.png' alt="avatar" width={329.81} height={195.87} />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src='/images/dummy3.png' alt="avatar" width={312.8} height={222.12} />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src='/images/dummy2.png' alt="avatar" width={329.81} height={195.87} />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src='/images/dummy1.png' alt="avatar" width={329.81} height={195.87} />
+        </ImageContainer>
+      </MobileHero>
     </>
   );
 }

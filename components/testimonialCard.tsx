@@ -5,7 +5,6 @@ export const Card = styled.div`
     height:147px;
     margin-top:16px;
     padding:16px;
-
     
 
 .text{

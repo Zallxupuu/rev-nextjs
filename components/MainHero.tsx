@@ -27,6 +27,13 @@ display:flex;
 align-items:center;
 justify-content:center;
 
+@media ${Device.desktop}{
+    width: 1040px;
+height: 694px;
+
+
+}
+
 background: #161616;
 
 
@@ -69,3 +76,34 @@ export const Dot = styled.div`
     }
 `
 
+
+
+export const DesktopHero = styled.div`
+    background-color: #2B2B2B;
+    padding-top:20px;
+    padding-bottom:16px;
+    display:grid;
+    justify-content:center;
+    
+    text-align:center;
+    color: #b8b8b8;
+    font-family: 'Switzer-light';
+    font-size:13px;
+
+    @media ${Device.mobile} {
+    display: none;
+    }
+`
+
+export const DesktopContent = styled.div`
+    width:100%;
+    background-color:#2B2B2B;
+    border-left:1px dashed #3E3E3E;
+    display:grid;
+    justify-content:center;
+
+    flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding-right: 20px;
+`

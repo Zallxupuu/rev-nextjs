@@ -10,8 +10,9 @@ export const SideHeroContainer = styled.div`
     border-bottom:1px dashed #3E3E3E;
 
     @media ${Device.desktop}{
-        width:390px;
-        height:468px
+        width:384px;
+        overflow-y:auto;
+        height: 100vh;
     }
 `
 
