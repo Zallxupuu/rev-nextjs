@@ -359,16 +359,16 @@ export default function Home() {
 
       <DesktopContent>
           <ImageContainer>
-          <Image src='/images/dummy1.png' alt="avatar" width={980} height={582} />
+          <Image src='/banner/Wireframe1.jpg' alt="avatar" width={980} height={582} style={{ borderRadius: '20px' }}/>
         </ImageContainer>
         <ImageContainer>
-          <Image src='/images/dummy3.png' alt="avatar" width={980} height={582} />
+          <Image src='/banner/Wireframe2.jpg' alt="avatar" width={980} height={582} style={{ borderRadius: '20px' }}/>
         </ImageContainer>
         <ImageContainer>
-          <Image src='/images/dummy2.png' alt="avatar" width={980} height={582} />
+          <Image src='/banner/Wireframe5.jpg' alt="avatar" width={980} height={582} style={{ borderRadius: '20px' }}/>
         </ImageContainer>
         <ImageContainer>
-          <Image src='/images/dummy1.png' alt="avatar" width={980} height={582} />
+          <Image src='/banner/Wireframe1.jpg' alt="avatar" width={980} height={582} style={{ borderRadius: '20px' }}/>
         </ImageContainer>
       </DesktopContent>
       </DesktopContainer>

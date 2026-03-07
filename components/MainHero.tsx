@@ -27,6 +27,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 
+
 @media ${Device.desktop}{
     width: 1040px;
 height: 694px;
